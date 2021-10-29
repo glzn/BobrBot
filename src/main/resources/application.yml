@@ -4,7 +4,7 @@ newUserMessage: Вас було додано до списку розсилок!
 deletedUserMessage: Вас було видалено зі списку розсилки.
 wrongCommandResponseMessage: Я не знаю такої команди! Для видалення зі списку розсилки наберіть /delete
 
-accidentsJobTime: 0 0/15 * * * *
+accidentsJobTime: 30 0/15 * * * *
 outagesJobTime: 0 5 18 * * *
 
 spring:
