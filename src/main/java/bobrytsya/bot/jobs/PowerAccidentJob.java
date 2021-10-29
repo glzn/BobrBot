@@ -32,7 +32,9 @@ public class PowerAccidentJob {
     public void buildAndSendMessage() {
         logger.info("PowerAccidentJob is starting");
         String message = makeMessage(getNewAccidents());
-        messageUtils.sendMessageWithTimeout(message);
+        if(!message.isEmpty()) {
+            messageUtils.sendMessageWithTimeout(message);
+        }
         logger.info("PowerAccidentJob job is finished");
     }
 
@@ -60,8 +62,10 @@ public class PowerAccidentJob {
         for (PowerAccidentInfo pai : newAccidents) {
             sb.append(String.format(INFO_MESSAGE, pai.getAccidentTime(), pai.getStreet(), pai.getResumptionTime()));
         }
-        sb.append("<a href=\"https://www.dtek-krem.com.ua/ua/shutdowns?query=" +
-                "Бобриця&subdivision=K14&disconnect-from=" + getCurrentDate() + "\">Детальніше</a>");
+        if(sb.length()>0) {
+            sb.append("<a href=\"https://www.dtek-krem.com.ua/ua/shutdowns?query=" +
+                    "Бобриця&subdivision=K14&disconnect-from=" + getCurrentDate() + "\">Детальніше</a>");
+        }
         return sb.toString();
     }
 
