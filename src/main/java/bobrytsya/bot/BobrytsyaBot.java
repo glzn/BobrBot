@@ -1,5 +1,7 @@
 package bobrytsya.bot;
 
+import bobrytsya.bot.entity.User;
+import bobrytsya.bot.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,8 +53,8 @@ public class BobrytsyaBot extends TelegramLongPollingBot {
         if(update.hasMessage()) {
             Message message = update.getMessage();
             logger.info("User {} sent message {}", message.getChatId(), message.getText());
-            String response;
 
+            String response;
             if("/start".equals(message.getText())) {
                 saveUser(message);
                 logger.info("User {} was added to DB", message.getChatId());
@@ -61,6 +63,8 @@ public class BobrytsyaBot extends TelegramLongPollingBot {
                 deleteUser(message);
                 logger.info("User {} was removed from DB", message.getChatId());
                 response = deletedUserMessage;
+            } else if("null".equals(message.getText())) {
+                response = "¯\\_(ツ)_/¯";
             } else {
                 response = wrongCommandResponseMessage;
             }
@@ -70,7 +74,7 @@ public class BobrytsyaBot extends TelegramLongPollingBot {
 
     private void sendMessage(Message message, String response) {
         try {
-            this.execute(new SendMessage(String.valueOf(message.getChatId()), response));
+            execute(new SendMessage(String.valueOf(message.getChatId()), response));
         } catch (TelegramApiException exception) {
             logger.error(exception.getMessage(), exception);
         }

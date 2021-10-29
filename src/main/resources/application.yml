@@ -1,10 +1,11 @@
 botUsername: BobrytsyaBot
 botToken: ${TELEGRAM_TOKEN}
-newUserMessage: Вас було додано до списку розсилок! Я дам знати, якщо з'явиться інформація про відключення електроенергії.
+newUserMessage: Вас було додано до списку розсилок! Я дам знати, якщо з'явиться інформація про нові відключення електроенергії.
 deletedUserMessage: Вас було видалено зі списку розсилки.
 wrongCommandResponseMessage: Я не знаю такої команди! Для видалення зі списку розсилки наберіть /delete
 
-cronTime: 0 1 19 * * *
+accidentsJobTime: 0 0/15 * * * *
+outagesJobTime: 0 5 18 * * *
 
 spring:
   datasource:

@@ -1,4 +1,4 @@
-package bobrytsya.bot;
+package bobrytsya.bot.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
